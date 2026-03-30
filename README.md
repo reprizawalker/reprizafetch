@@ -24,7 +24,7 @@ sudo dnf install python3
 git clone https://github.com/reprizawalker/reprizafetch.git
 cd reprizafetch
 chmod +x reprizafetch.py
-sudo ln -s $(pwd)/reprizafetch.py /usr/local/bin/reprizafetch
+sudo cp $(pwd)/reprizafetch.py /usr/local/bin/reprizafetch
 ```
 ```
 

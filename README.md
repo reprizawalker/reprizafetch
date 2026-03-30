@@ -1,6 +1,5 @@
-# reprizafetch
+# fetch by repriza
 
-# reprizafetch
 
 just a fetch by repriza
 

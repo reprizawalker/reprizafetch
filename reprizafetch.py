@@ -50,18 +50,44 @@ def get_ram():
     used = total - available
     return f"{used}MB / {total}MB"
 
+def get_gpu():
+    # os.popen запускает терминальную команду и позволяет прочитать её результат
+    stream = os.popen("glxinfo | grep 'Device:'")
+    output = stream.read()
+    
+    # Если команда что-то вернула, чистим строку от лишнего
+    if output:
+        # Разбиваем по двоеточию и берем правую часть, убираем пробелы
+        return output.split("Device:")[1].split("(")[0].strip()
+    
+    return "Unknown GPU"
+
+
 def get_shell():
     return os.path.basename(os.environ.get("SHELL", "unknown"))
 
+def get_font():
+    kitty_conf = os.path.expanduser("~/.config/kitty/kitty.conf")
+    if os.path.exists(kitty_conf):
+        with open(kitty_conf) as f:
+            for line in f:
+                if line.startswith("font_family"):
+                    return line.split(None, 1)[1].strip()
+    else:
+        result = subprocess.run(['fc-match', 'monospace'], capture_output=True, text=True)
+        return result.stdout.strip().split(':')[0]
 print(LOGO)
 
 info = {
+    
     "OS":     get_os(),
     "Kernel": get_kernel(),
     "Uptime": get_uptime(),
     "CPU":    get_cpu(),
+    "GPU":    get_gpu(),
     "RAM":    get_ram(),
     "Shell":  get_shell(),
+    "Font": get_font(),
 }
 
 

@@ -62,6 +62,10 @@ def get_gpu():
     
     return "Unknown GPU"
 
+def get_systemlang():
+    system_lang = os.environ.get('LANG')
+    return system_lang
+
 
 def get_shell():
     return os.path.basename(os.environ.get("SHELL", "unknown"))
@@ -88,6 +92,7 @@ info = {
     "RAM":    get_ram(),
     "Shell":  get_shell(),
     "Font": get_font(),
+    "Language": get_systemlang(),
 }
 
 

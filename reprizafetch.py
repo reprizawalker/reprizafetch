@@ -66,6 +66,9 @@ def get_systemlang():
     system_lang = os.environ.get('LANG')
     return system_lang
 
+def is_windows():
+    return "No. You are a happy, open-source enjoyer, non-prisoned user"
+
 def get_user():
     username = os.environ.get('USER')
     return username
@@ -98,6 +101,7 @@ info = {
     "Shell":  get_shell(),
     "Font": get_font(),
     "Language": get_systemlang(),
+    "Is Windows?": is_windows(),
     
 }
 
